@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<vox_configuration>
+  <info>
+    <add key="enable_throw_error" value="true" />
+  </info>
+  <appSettings>
+    <CONFIGFILELOGPATH>AppLog.config</CONFIGFILELOGPATH>
+    <USUARIODB>SYSDBA</USUARIODB>
+    <PWDDB>masterkey</PWDDB>
+    <DATABASENAME>vox</DATABASENAME>
+    <SERVIDOR>192.168.0.231</SERVIDOR>
+    <DBType>5</DBType>
+    <DSN />
+
+  </appSettings>
+</vox_configuration>

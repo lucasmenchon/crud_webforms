@@ -1,23 +1,20 @@
-﻿using System;
+﻿using Framework.Base.Atributos;
+using Framework.Base.Database;
+using Framework.Base.Entidade;
+using Framework.Base.Enumeradores;
+using Framework.Base.Utils;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Web;
+using VoxPerfect.RN.cs;
 
 namespace TVox.Models
 {
-    public class Contact
+    [clsAtrTabela("CONTACT")]
+    public class Contact //: clsBaseEntidade
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
-        public int Age { get; set; }
-
-        public string Phone { get; set; }
-
-        public string Gender { get; set; }
-
-        public string RegisterDate { get; set; }
+        
 
     }
 }

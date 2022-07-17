@@ -53,9 +53,10 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Página inicial</a></li>
                         <li><a runat="server" href="~/Cadastro">Cadastro Memoria</a></li>
-                        <li><a runat="server" href="~/CadastroDb">Cadastro Database</a></li>
-                        <li><a runat="server" href="~/CadastroBusca">Cadastro Busca</a></li>
-                        <li><a runat="server" href="~/CadastroVox">Cadastro Vox</a></li>
+                        <li><a runat="server" href="~/CadastroNoDB">Cadastro Database</a></li>
+                        <li><a runat="server" href="~/CadastroVox">Cadastro Padrões Vox</a></li>
+                        <li><a runat="server" href="~/BuscaVox">Busca Vox</a></li>
+                        <li><a runat="server" href="~/CadastroCIT">Cadastro CIT</a></li>
                     </ul>
                 </div>
             </div>

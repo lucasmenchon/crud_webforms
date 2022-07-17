@@ -83,10 +83,12 @@
 
     </table>
 
-    <asp:GridView ID="DbGridView" runat="server" Width="550px" OnSelectedIndexChanged="SelectContact">
-
+    <asp:GridView ID="DbGridView" runat="server" Width="705px" OnSelectedIndexChanged="SelectContact" CssClass="table table-striped table-bordered">
+    
         <Columns>
-            <asp:CommandField ShowSelectButton="True"></asp:CommandField>
+            <asp:CommandField ShowSelectButton="True" ButtonType="Button">
+                <ControlStyle CssClass="btn btn-sm btn-primary" />
+            </asp:CommandField>
         </Columns>
     </asp:GridView>
 

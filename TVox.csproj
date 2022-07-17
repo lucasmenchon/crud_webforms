@@ -134,8 +134,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="BuscaVox.aspx">
+      <BrowseToURL>~/BuscaVox.aspx</BrowseToURL>
+    </Content>
     <Content Include="Cadastro.aspx" />
-    <Content Include="CadastroBusca.aspx" />
+    <Content Include="CadastroCIT.aspx" />
+    <Content Include="CadastroNoDB.aspx" />
     <Content Include="CadastroDb.aspx" />
     <Content Include="CadastroVox.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -200,6 +204,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BuscaVox.aspx.cs">
+      <DependentUpon>BuscaVox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuscaVox.aspx.designer.cs">
+      <DependentUpon>BuscaVox.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Cadastro.aspx.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -207,12 +218,19 @@
     <Compile Include="Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CadastroBusca.aspx.cs">
-      <DependentUpon>CadastroBusca.aspx</DependentUpon>
+    <Compile Include="CadastroCIT.aspx.cs">
+      <DependentUpon>CadastroCIT.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CadastroBusca.aspx.designer.cs">
-      <DependentUpon>CadastroBusca.aspx</DependentUpon>
+    <Compile Include="CadastroCIT.aspx.designer.cs">
+      <DependentUpon>CadastroCIT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CadastroNoDB.aspx.cs">
+      <DependentUpon>CadastroNoDB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CadastroNoDB.aspx.designer.cs">
+      <DependentUpon>CadastroNoDB.aspx</DependentUpon>
     </Compile>
     <Compile Include="CadastroDb.aspx.cs">
       <DependentUpon>CadastroDb.aspx</DependentUpon>
@@ -277,6 +295,32 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LanguageVoxLib\Dev\LanguageVoxLib.csproj">
+      <Project>{68b98a1c-a5ab-4ed0-9b30-2e2f1e60b5dd}</Project>
+      <Name>LanguageVoxLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VoxConfigurationManager\Dev\VoxConfigurationManager\VoxConfigurationManager.csproj">
+      <Project>{9887b984-9c00-4664-9968-a4a0b69ec3b8}</Project>
+      <Name>VoxConfigurationManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VoxFrameworkCIT\Dev\VoxPerfect.Framework\VoxPerfect.Framework.csproj">
+      <Project>{4dffdd01-45c5-4c6f-9018-5f45c217084b}</Project>
+      <Name>VoxPerfect.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VoxNetworkLibrary\Dev\VoxNetworkLibrary\VoxNetworkLibrary.csproj">
+      <Project>{2fc3f3dd-66f4-4fea-9bd1-3821bf9f013b}</Project>
+      <Name>VoxNetworkLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VoxPerfectRN\Dev\VoxPerfect.RN\VoxPerfect.RN.csproj">
+      <Project>{8bb49d53-48d4-4d31-bc0e-c230ed9ed927}</Project>
+      <Name>VoxPerfect.RN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VoxTranscription\Dev\VoxTranscription.Models\VoxTranscription.Models\VoxTranscription.Models.csproj">
+      <Project>{2fa4ae4e-3a48-446d-8043-ceefd9692fcd}</Project>
+      <Name>VoxTranscription.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

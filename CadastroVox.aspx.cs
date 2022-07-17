@@ -43,7 +43,6 @@ namespace TVox
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.ToString());
             }
         }
