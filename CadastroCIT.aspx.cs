@@ -4,26 +4,48 @@ using System.Data.SqlClient;
 using System.Web.UI;
 using VoxPerfect.RN.cs;
 using System.Collections.Generic;
+using TVox.Models;
+using System.Linq;
 
 namespace TVox
 {
     public partial class CadastroCIT : System.Web.UI.Page
     {
-        SqlConnection m_connect = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=contatos_db;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-        //SqlCommand m_command = new SqlCommand();
-        //SqlDataAdapter m_adapter = new SqlDataAdapter();
-        DataTable m_datatable = new DataTable();
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<clsContact> clsContacts = clsContact.GetContacts();
-
             try
             {
                 if (!IsPostBack)
                 {
                     LoadData();
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+
+        public void LoadData()
+        {
+            try
+            {
+                Contact l_contactSearch = new Contact();
+                List<Contact> l_contacts = l_contactSearch.Listar().Cast<Contact>().AsQueryable().ToList();
+
+                DbGridView.DataSource = l_contacts.Select(p => new
+                {
+                    ID = p.Id,
+                    Name = p.Name,
+                    Age = p.Age,
+                    Phone = p.Phone,
+                    Gender = p.Gender,
+                    RegisterDate = p.RegisterDate.ToString("dd/MM/yyyy"),
+
+                });
+
+                DbGridView.DataBind();
+
             }
             catch (Exception ex)
             {
@@ -43,107 +65,75 @@ namespace TVox
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.ToString());
             }
         }
 
-        protected void RegisterContact(object sender, EventArgs e) // '" + int.Parse(txtId.Text) + "',
+        protected void RegisterContact(object sender, EventArgs e)
         {
-            try
+            Contact l_contact = new Contact();
+
+            l_contact.Id = Convert.ToDecimal(l_contact.getNewPK());
+            l_contact.Name = textName.Text;
+            l_contact.Age = Convert.ToInt32(textAge.Text);
+            l_contact.Phone = textPhone.Text;
+            l_contact.Gender = ddlGender.SelectedValue;
+            l_contact.RegisterDate = Convert.ToDateTime(RegisterDate.Text);
+
+            if (l_contact.Salvar(true) > 0)
             {
-                m_connect.Open();
-                SqlCommand l_command = new SqlCommand("INSERT INTO Contato VALUES ('" + textName.Text + "','" + int.Parse(textAge.Text) + "','" + textPhone.Text + "','" + ddlGender.SelectedValue + "','" + RegisterDate.Text + "')", m_connect); ;
-                l_command.ExecuteNonQuery();
-                m_connect.Close();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Sucesso. Cadastrado!');", true);
-                LoadData();
-                ClearForm();
+                textMsg.Text = "<p class='alert alert-success' role='alert'>CADASTRADO COM SUCESSO!</p>";
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception(ex.ToString());
+                textMsg.Text = "<div class='alert alert-warning' role='alert'>CADASTRADO NÃO EFETUADO!</ div >";
             }
+
+            ClearForm();
+            LoadData();
         }
 
-        void LoadData()
+        protected void UpdateContact(object sender, EventArgs e)
         {
-            try
-            {
-                SqlCommand l_command = new SqlCommand(" SELECT * FROM Contato", m_connect);
-                SqlDataAdapter l_adapter = new SqlDataAdapter(l_command);
-                m_datatable = new DataTable();
-                l_adapter.Fill(m_datatable);
-                DbGridView.DataSource = m_datatable;
-                DbGridView.DataBind();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-        }
+            // Update
+            Contact l_contactUpdate = new Contact();
+            l_contactUpdate.Id = Convert.ToDecimal(lblId.Text);
 
-        protected void UpdateContact(object sender, EventArgs e) //btnUpdateContact btnUpdate(X)
-        {
-            try
+            //retorna objeto
+            if (l_contactUpdate.Abrir())
             {
-                m_connect.Open();
-                SqlCommand l_command = new SqlCommand("UPDATE Contato SET Nome = '" + textName.Text + "', Idade = '" + int.Parse(textAge.Text) + "', Telefone = '" + textPhone.Text + "', Genero = '" + ddlGender.SelectedValue + "', DataCadastro = '" + RegisterDate.Text + "' WHERE Id = '" + int.Parse(lblId.Text) + "'", m_connect);
-                l_command.ExecuteNonQuery();
-                m_connect.Close();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Sucesso. Atualizado!');", true);
-                LoadData();
-                ClearForm();
+
+                l_contactUpdate.Name = textName.Text;
+                l_contactUpdate.Age = Convert.ToInt32(textAge.Text);
+                l_contactUpdate.Phone = textPhone.Text;
+                l_contactUpdate.Gender = ddlGender.SelectedValue;
+                l_contactUpdate.RegisterDate = Convert.ToDateTime(RegisterDate.Text);
+                if(l_contactUpdate.Salvar(true) > 0)
+                {
+                    textMsg.Text = "<p class='alert alert-success' role='alert'>ATUALIZADO COM SUCESSO!</p>";
+                }
+                else
+                {
+                    textMsg.Text = "<p class='alert alert-warning' role='alert'>NÃO ATUALIZADO!</p>";
+                }
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
+
+            ClearForm();
+            LoadData();
         }
 
         protected void DeleteContact(object sender, EventArgs e)
         {
-            try
-            {
-
-                m_connect.Open();
-                SqlCommand l_command = new SqlCommand("DELETE Contato WHERE Id = '" + int.Parse(lblId.Text) + "'", m_connect);
-                l_command.ExecuteNonQuery();
-                m_connect.Close();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Sucesso. Deletado!');", true);
-                LoadData();
-                ClearForm();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
+            //delete
+            Contact l_contactDelete = new Contact();
+            l_contactDelete.Id = Convert.ToDecimal(lblId.Text);
+            l_contactDelete.Excluir();
+                        
+            ClearForm();
+            LoadData();
         }
 
-        protected void SearchContact(object sender, EventArgs e)
-        {
-            try
-            {
-                SqlCommand l_command = new SqlCommand(" SELECT Nome, Idade, Telefone, Genero, DataCadastro FROM Contato WHERE Nome LIKE '" + "%" + textSearchContact.Text + "%" + "' ", m_connect);
-                if (textSearchContact.Text == "")
-                {
-                    LoadData();
-                }
-                else
-                {
-                    SqlDataAdapter l_adapter = new SqlDataAdapter(l_command);
-                    l_adapter.Fill(m_datatable);
-                    DbGridView.DataSource = m_datatable;
-                    DbGridView.DataBind();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-        }
-
-        protected void SelectContact(object sender, EventArgs e)
+        protected void DbGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -152,7 +142,7 @@ namespace TVox
                 textAge.Text = DbGridView.SelectedRow.Cells[3].Text;
                 textPhone.Text = DbGridView.SelectedRow.Cells[4].Text;
                 ddlGender.Text = DbGridView.SelectedRow.Cells[5].Text;
-                RegisterDate.Text = DbGridView.SelectedRow.Cells[6].Text;
+                RegisterDate.Text = Convert.ToDateTime(DbGridView.SelectedRow.Cells[6].Text).ToString("yyyy-MM-dd");
             }
             catch (Exception ex)
             {

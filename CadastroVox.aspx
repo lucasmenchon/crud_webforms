@@ -73,12 +73,6 @@
             </td>
         </tr>
         <tr>
-            <td class="modal-sm" style="width: 609px">
-                <asp:Button ID="IdSearchContact" runat="server" Text="Buscar por Nome" CssClass="btn btn-sm btn-warning txtNome" OnClick="SearchContact" />
-                <asp:TextBox ID="textSearchContact" runat="server"></asp:TextBox>
-                <br />
-                <br />
-            </td>
         </tr>
 
     </table>

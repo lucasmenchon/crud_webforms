@@ -29,7 +29,7 @@
             <td class="modal-sm" style="width: 124px">Idade:</td>
             <td class="modal-sm">
                 <br />
-                <asp:TextBox ID="textAge" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="textAge" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
                 <br />
             </td>
         </tr>
@@ -71,25 +71,21 @@
                 <asp:Button ID="IdDeleteContact" runat="server" Text="Deletar" CssClass="btn btn-sm btn-danger" OnClick="DeleteContact" />
                 <br />
                 <br />
-            </td>
-        </tr>
-        <tr>
-            <td class="modal-sm" style="width: 609px">
-                <asp:Button ID="IdSearchContact" runat="server" Text="Buscar por Nome" CssClass="btn btn-sm btn-warning txtNome" OnClick="SearchContact" />
-                <asp:TextBox ID="textSearchContact" runat="server"></asp:TextBox>
+                <asp:Label ID="textMsg" runat="server"></asp:Label>
                 <br />
                 <br />
             </td>
         </tr>
-
     </table>
 
-    <asp:GridView ID="DbGridView" runat="server" Width="550px" OnSelectedIndexChanged="SelectContact">
+    <asp:GridView ID="DbGridView" runat="server" Width="719px" OnSelectedIndexChanged="DbGridView_SelectedIndexChanged" CssClass="table table-striped table-bordered">
 
         <Columns>
-            <asp:CommandField ShowSelectButton="True"></asp:CommandField>
+            <asp:CommandField ShowSelectButton="True" AccessibleHeaderText="Selecionar" ButtonType="Button">
+                <ControlStyle CssClass="btn btn-sm btn-primary" />
+            </asp:CommandField>
+        </Columns>
+        <Columns>
         </Columns>
     </asp:GridView>
-
-
 </asp:Content>

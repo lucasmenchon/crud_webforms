@@ -65,7 +65,7 @@ namespace TVox
             }
         }
 
-        void LoadData()
+        public void LoadData()
         {
             try
             {
@@ -119,28 +119,28 @@ namespace TVox
             }
         }
 
-        protected void SearchContact(object sender, EventArgs e)
-        {
-            try
-            {
-                SqlCommand l_command = new SqlCommand(" SELECT Nome, Idade, Telefone, Genero, DataCadastro FROM Contato WHERE Nome LIKE '" + "%" + textSearchContact.Text + "%" + "' ", m_connect);
-                if (textSearchContact.Text == "")
-                {
-                    LoadData();
-                }
-                else
-                {
-                    SqlDataAdapter l_adapter = new SqlDataAdapter(l_command);
-                    l_adapter.Fill(m_datatable);
-                    DbGridView.DataSource = m_datatable;
-                    DbGridView.DataBind();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-        }
+        //protected void SearchContact(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        SqlCommand l_command = new SqlCommand(" SELECT Nome, Idade, Telefone, Genero, DataCadastro FROM Contato WHERE Nome LIKE '" + "%" + textSearchContact.Text + "%" + "' ", m_connect);
+        //        if (textSearchContact.Text == "")
+        //        {
+        //            LoadData();
+        //        }
+        //        else
+        //        {
+        //            SqlDataAdapter l_adapter = new SqlDataAdapter(l_command);
+        //            l_adapter.Fill(m_datatable);
+        //            DbGridView.DataSource = m_datatable;
+        //            DbGridView.DataBind();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.ToString());
+        //    }
+        //}
 
         protected void SelectContact(object sender, EventArgs e)
         {

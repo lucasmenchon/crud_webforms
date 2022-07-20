@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="BuscaCIT.aspx" />
     <Content Include="BuscaVox.aspx">
       <BrowseToURL>~/BuscaVox.aspx</BrowseToURL>
     </Content>
@@ -204,6 +205,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BuscaCIT.aspx.cs">
+      <DependentUpon>BuscaCIT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuscaCIT.aspx.designer.cs">
+      <DependentUpon>BuscaCIT.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BuscaVox.aspx.cs">
       <DependentUpon>BuscaVox.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

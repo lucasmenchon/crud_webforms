@@ -57,11 +57,12 @@
                         <li><a runat="server" href="~/CadastroVox">Cadastro Padrões Vox</a></li>
                         <li><a runat="server" href="~/BuscaVox">Busca Vox</a></li>
                         <li><a runat="server" href="~/CadastroCIT">Cadastro CIT</a></li>
+                        <li><a runat="server" href="~/BuscaCIT">Busca CIT</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="container body-content">
+        <div class="container body-content" style="padding-left: 0; padding-right: 0;">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
