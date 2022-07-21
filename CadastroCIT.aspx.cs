@@ -86,7 +86,7 @@ namespace TVox
             }
             else
             {
-                textMsg.Text = "<div class='alert alert-warning' role='alert'>CADASTRADO NÃO EFETUADO!</ div >";
+                textMsg.Text = "<div class='alert alert-warning' role='alert'>NÃO CADASTRADO.</ div >";
             }
 
             ClearForm();
@@ -108,9 +108,9 @@ namespace TVox
                 l_contactUpdate.Phone = textPhone.Text;
                 l_contactUpdate.Gender = ddlGender.SelectedValue;
                 l_contactUpdate.RegisterDate = Convert.ToDateTime(RegisterDate.Text);
-                if(l_contactUpdate.Salvar(true) > 0)
+                if (l_contactUpdate.Salvar(true) > 0)
                 {
-                    textMsg.Text = "<p class='alert alert-success' role='alert'>ATUALIZADO COM SUCESSO!</p>";
+                    textMsg.Text = "<p class='alert alert-info' role='alert'>ATUALIZADO COM SUCESSO!</p>";
                 }
                 else
                 {
@@ -128,7 +128,8 @@ namespace TVox
             Contact l_contactDelete = new Contact();
             l_contactDelete.Id = Convert.ToDecimal(lblId.Text);
             l_contactDelete.Excluir();
-                        
+            textMsg.Text = "<p class='alert alert-danger' role='alert'>DELETADO COM SUCESSO!</p>";
+
             ClearForm();
             LoadData();
         }
